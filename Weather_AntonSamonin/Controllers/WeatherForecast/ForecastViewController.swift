@@ -13,21 +13,9 @@ class ForecastViewController: UIViewController {
     
     private var weatherForecast: Results<Weather>?
     private var notificationToken: NotificationToken?
-    private var todayDateStr: String {
-        var today = Date()
-        var dateFormatter: DateFormatter {
-            let dt = DateFormatter()
-            dt.dateFormat = "EEEE dd MMMM"
-            dt.timeZone = TimeZone.current
-            dt.locale = Locale(identifier: "ru_RU")
-            return dt
-        }
-        return dateFormatter.string(from: today )
-    }
+    private var todayDateStr = currentDate()
     private var daysOfTheWeek = [[Weather]]()
    
-    
-    
     
     @IBOutlet weak var forecastTableView: UITableView!{
         didSet {
@@ -99,6 +87,7 @@ class ForecastViewController: UIViewController {
         }
     }
     
+}
 
 extension ForecastViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -137,6 +126,18 @@ extension ForecastViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let weekDay = daysOfTheWeek[section][0].dayOfTheWeek
         return weekDay
+    }
+    
+    static func currentDate() -> String {
+        var today = Date()
+        var dateFormatter: DateFormatter {
+            let dt = DateFormatter()
+            dt.dateFormat = "EEEE dd MMMM"
+            dt.timeZone = TimeZone.current
+            dt.locale = Locale(identifier: "ru_RU")
+            return dt
+        }
+        return dateFormatter.string(from: today )
     }
     
    

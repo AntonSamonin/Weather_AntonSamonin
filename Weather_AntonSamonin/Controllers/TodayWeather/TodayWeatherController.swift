@@ -12,21 +12,12 @@ import RealmSwift
 
 class TodayWeatherController: UIViewController {
     
+    
     private var weatherService = WeatherService()
     private var cityName = "Samara"
     private var notificationToken: NotificationToken?
     private var todayWeather: Results<Weather>?
-    private var todayDateStr: String {
-        var today = Date()
-        var dateFormatter: DateFormatter {
-            let dt = DateFormatter()
-            dt.dateFormat = "EEEE dd MMMM"
-            dt.timeZone = TimeZone.current
-            dt.locale = Locale(identifier: "ru_RU")
-            return dt
-        }
-        return dateFormatter.string(from: today )
-    }
+    private var todayDateStr = currentDate()
     
     
     @IBOutlet weak var weatherTableView: UITableView! {
@@ -133,6 +124,17 @@ extension TodayWeatherController: UITableViewDataSource {
         }
     }
     
+   static func currentDate() -> String {
+        var today = Date()
+        var dateFormatter: DateFormatter {
+            let dt = DateFormatter()
+            dt.dateFormat = "EEEE dd MMMM"
+            dt.timeZone = TimeZone.current
+            dt.locale = Locale(identifier: "ru_RU")
+            return dt
+        }
+        return dateFormatter.string(from: today )
+    }
+    
 }
-
 
