@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Today Weather Forecast" rowHeight="80" id="KGk-i7-Jjw" customClass="TodayTableViewCell" customModule="Weather_AntonSamonin" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fD9-fk-z5f">
+                        <rect key="frame" x="177.5" y="27.5" width="51.5" height="24.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K7R-cB-JgM">
+                        <rect key="frame" x="239" y="15" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="K7R-cB-JgM" secondAttribute="height" multiplier="1:1" id="OfK-VX-iDJ"/>
+                            <constraint firstAttribute="width" constant="50" id="SWA-Be-M1K"/>
+                            <constraint firstAttribute="height" constant="50" id="qOJ-DH-Fiz"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dY3-9W-Gro">
+                        <rect key="frame" x="31" y="27.5" width="46" height="24.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="K7R-cB-JgM" firstAttribute="centerY" secondItem="fD9-fk-z5f" secondAttribute="centerY" id="Dgs-mf-aHW"/>
+                    <constraint firstItem="dY3-9W-Gro" firstAttribute="centerY" secondItem="fD9-fk-z5f" secondAttribute="centerY" id="Ldq-aL-8MF"/>
+                    <constraint firstItem="K7R-cB-JgM" firstAttribute="leading" secondItem="fD9-fk-z5f" secondAttribute="trailing" constant="10" id="Yb0-KZ-sSx"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="K7R-cB-JgM" secondAttribute="trailing" constant="15" id="bI4-cD-ucA"/>
+                    <constraint firstItem="fD9-fk-z5f" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hui-Mk-UCg"/>
+                    <constraint firstItem="dY3-9W-Gro" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="jPe-fH-2hf"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="tempretureLabel" destination="fD9-fk-z5f" id="v9Z-mc-0y1"/>
+                <outlet property="timeLable" destination="dY3-9W-Gro" id="hTa-Ky-asc"/>
+                <outlet property="weatherIcon" destination="K7R-cB-JgM" id="JWk-ay-8K7"/>
+            </connections>
+            <point key="canvasLocation" x="121.59999999999999" y="101.64917541229386"/>
+        </tableViewCell>
+    </objects>
+</document>
