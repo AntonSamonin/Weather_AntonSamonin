@@ -236,6 +236,7 @@
                         <color key="selectedImageTintColor" red="0.5910065770149231" green="0.89948809146881104" blue="0.80391389131546021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
+                        <outlet property="refreshButton" destination="ryk-FQ-h6K" id="nn0-wB-CKa"/>
                         <segue destination="N8L-XR-ZNK" kind="relationship" relationship="viewControllers" id="ekN-VR-jLH"/>
                         <segue destination="w4k-RK-DL7" kind="relationship" relationship="viewControllers" id="TkI-E5-DCM"/>
                     </connections>

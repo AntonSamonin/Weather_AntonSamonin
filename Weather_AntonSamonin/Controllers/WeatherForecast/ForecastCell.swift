@@ -38,12 +38,12 @@ class ForecastCell: UITableViewCell {
     
     override func layoutIfNeeded() { // Закругление
         super .layoutIfNeeded()
-//        self.visualEffectView.clipsToBounds = true
-//        self.visualEffectView.layer.cornerRadius = 16
+        //        self.visualEffectView.clipsToBounds = true
+        //        self.visualEffectView.layer.cornerRadius = 16
     }
     
     
-     func configure(with weather: Weather) {
+    func configure(with weather: Weather) {
         self.weatherIcon.kf.setImage(with: WeatherService.urlForWeatherIcon(weather.weatherIcon))
         self.pressureLabel.text = String("\(weather.pressure) мм рт. ст.")
         self.windLabel.text = String("\(weather.wind) м/с")
@@ -61,10 +61,10 @@ class ForecastCell: UITableViewCell {
         self.afternoonTempLabel.text = nil
         self.eveningTempLabel.text = nil
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     

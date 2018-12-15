@@ -15,7 +15,7 @@ class ForecastViewController: UIViewController {
     private var notificationToken: NotificationToken?
     private var todayDateStr = currentDate()
     private var daysOfTheWeek = [[Weather]]()
-   
+    
     
     @IBOutlet weak var forecastTableView: UITableView!{
         didSet {
@@ -31,7 +31,7 @@ class ForecastViewController: UIViewController {
         forecastTableView.estimatedRowHeight = 44
         forecastTableView.rowHeight = UITableView.automaticDimension
         
-
+        
         self.weatherForecast = DataBaseService.get(itemsType: Weather.self, config: Realm.Configuration.defaultConfiguration)?.filter("dayOfTheWeek != '\(todayDateStr)'")
         
         self.sortedDays()
@@ -42,7 +42,7 @@ class ForecastViewController: UIViewController {
         self.notificationToken = weatherForecast?.observe{[weak self]  changes in
             guard let self = self else {return}
             switch changes {
-
+                
             case .initial(_):
                 self.forecastTableView.reloadData()
                 print("Подписался на weatherForecast")
@@ -102,27 +102,27 @@ extension ForecastViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ForecastCell", for: indexPath) as! ForecastCell
-
+        
         
         cell.configure(with: daysOfTheWeek[indexPath.section][4])
         cell.nightTempLabel.text = String(format: "%.0f℃", daysOfTheWeek[indexPath.section][0].tempreture)
         cell.morningTempLabel.text = String(format: "%.0f℃", daysOfTheWeek[indexPath.section][2].tempreture)
         cell.afternoonTempLabel.text = String(format: "%.0f℃", daysOfTheWeek[indexPath.section][4].tempreture)
         cell.eveningTempLabel.text = String(format: "%.0f℃", daysOfTheWeek[indexPath.section][6].tempreture)
-
+        
         
         return cell
         
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as! HeaderView
-//        let dayOfTheWeek = dateFormatter(weather: daysOfTheWeek[section][0], format: "EEEE MMMM d")
-//        header.headerLabel.text = dayOfTheWeek
-//        return header
-//    }
+    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    //        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as! HeaderView
+    //        let dayOfTheWeek = dateFormatter(weather: daysOfTheWeek[section][0], format: "EEEE MMMM d")
+    //        header.headerLabel.text = dayOfTheWeek
+    //        return header
+    //    }
     
-  
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let weekDay = daysOfTheWeek[section][0].dayOfTheWeek
         return weekDay
@@ -140,8 +140,8 @@ extension ForecastViewController: UITableViewDataSource, UITableViewDelegate {
         return dateFormatter.string(from: today )
     }
     
-   
+    
 }
-    
-    
+
+
 

@@ -18,6 +18,8 @@ class TodayWeatherController: UIViewController {
     private var notificationToken: NotificationToken?
     private var todayWeather: Results<Weather>?
     private var todayDateStr = currentDate()
+    private var tomorrowStr = tomorrow()
+    
     
     
     @IBOutlet weak var weatherTableView: UITableView! {
@@ -50,6 +52,9 @@ class TodayWeatherController: UIViewController {
         weatherService.loadWeatherForecast(cityName: cityName) {(weathers, error) in
             if let error = error {
                 print(error.localizedDescription)
+                let alert = UIAlertController(title: "Отсутствует подключение к интернету.", message: "", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
                 return
             }
             guard let weathers = weathers else {return}
@@ -60,8 +65,11 @@ class TodayWeatherController: UIViewController {
         do {
             let realm = try Realm(configuration: Realm.Configuration.defaultConfiguration)
             self.todayWeather = realm.objects(Weather.self).filter("dayOfTheWeek == '\(todayDateStr)'")
-            
-        } catch {return}
+            if let todayWeather = todayWeather, todayWeather.isEmpty {
+                self.todayWeather = realm.objects(Weather.self).filter("dayOfTheWeek == '\(tomorrowStr)'")
+            }
+        }
+        catch {return}
         
     }
     
@@ -74,13 +82,11 @@ class TodayWeatherController: UIViewController {
             guard let self = self else {return}
             switch changes {
             case .initial(_):
-                do {
-                    let realm = try Realm(configuration: Realm.Configuration.defaultConfiguration)
-                    if !realm.isEmpty {
+                if !self.todayWeather!.isEmpty {
                         self.configureTodayWeather()
                         self.weatherTableView.reloadData()
                     }
-                } catch {return}
+               
                 print("подписался на todayWeather")
             case .update(_, let deletions, let insertions, let modifications):
                 self.configureTodayWeather()
@@ -112,7 +118,7 @@ extension TodayWeatherController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "  Сегодня"
+        return "  Ближайшее время"
     }
     
     func configureTodayWeather() {
@@ -124,7 +130,7 @@ extension TodayWeatherController: UITableViewDataSource {
         }
     }
     
-   static func currentDate() -> String {
+    static func currentDate() -> String {
         var today = Date()
         var dateFormatter: DateFormatter {
             let dt = DateFormatter()
@@ -136,5 +142,22 @@ extension TodayWeatherController: UITableViewDataSource {
         return dateFormatter.string(from: today )
     }
     
+    static func tomorrow() -> String {
+        var tomorrow: Date {
+            var dateComponents = DateComponents()
+            dateComponents.setValue(1, for: .day); // +1 day
+            let now = Date() // Current date
+            let tomorrow = Calendar.current.date(byAdding: dateComponents, to: now)  // Add the DateComponents
+            return tomorrow!
+        }
+        var dateFormatter: DateFormatter {
+            let dt = DateFormatter()
+            dt.dateFormat = "EEEE dd MMMM"
+            dt.timeZone = TimeZone.current
+            dt.locale = Locale(identifier: "ru_RU")
+            return dt
+        }
+        return dateFormatter.string(from: tomorrow)
+    }
 }
 
